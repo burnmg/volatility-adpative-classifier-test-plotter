@@ -9,13 +9,13 @@ def main(args):
     x = []
     correct_rate = []
     vol_drift_positions = []
-    with open(args[1], 'r') as f:
+    with open(args[0], 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
             x.append(float(row['learning evaluation instances']))
             correct_rate.append(float(row['classifications correct (percent)']))
 
-    with open(args[2], 'r') as f:
+    with open(args[1], 'r') as f:
         reader = csv.DictReader(f)
         for row in reader:
             vol_drift_positions.append(float(row['VolatilityDriftInstance']))
