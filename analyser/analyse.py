@@ -1,21 +1,25 @@
 import csv
 import matplotlib.pyplot as plt
 import os.path
+import numpy as np
 
-
-x = []
-y = []
+instances_index = []
+correct_rates = []
+bytes = []
+times = []
 
 # correct rate plot
-resfile = "res.csv"
-if os.path.isfile(resfile):
+res_file = "res.csv"
+if os.path.isfile(res_file):
 
-    with open(resfile, 'rb') as f:
+    with open(res_file, 'rb') as f:
         reader = csv.DictReader(f)
         for row in reader:
-            x.append(float(row['learning evaluation instances']))
-            y.append(float(row['classifications correct (percent)']))
-    plt.plot(x, y, 'r')
+            instances_index.append(float(row['learning evaluation instances']))
+            correct_rates.append(float(row['classifications correct (percent)']))
+            bytes.append(float(row['model serialized size (bytes)']))
+            times.append(float(row['evaluation time (cpu seconds)']))
+    plt.plot(instances_index, correct_rates, 'r')
 
 plt.xlabel('instance')
 plt.ylabel('percentage of correct')
@@ -33,5 +37,6 @@ if os.path.isfile(change_point_path):
 plt.grid(True)
 plt.show()
 
-# write avg correct_rate, time, byte
-
+# write avg correct_rates, time, byte
+mean_correct_rates = np.mean(correct_rates)
+mean_bytes = np.mean(bytes)
