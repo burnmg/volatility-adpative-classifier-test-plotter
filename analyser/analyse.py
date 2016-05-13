@@ -35,8 +35,22 @@ if os.path.isfile(change_point_path):
     for i in change_points:
         plt.axvline(i, color='b')
 plt.grid(True)
-plt.show()
+
 
 # write avg correct_rates, time, byte
 mean_correct_rates = np.mean(correct_rates)
 mean_bytes = np.mean(bytes)
+
+with open('summary.csv', 'w') as summary:
+    fieldnames = ['mean correct rate', 'time', 'mean byte']
+    writer = csv.DictWriter(summary, fieldnames=fieldnames)
+
+    writer.writeheader()
+    writer.writerow({
+        'mean correct rate': mean_correct_rates,
+        'time': times[len(times)-1],
+        'mean byte': mean_bytes
+
+    })
+
+plt.show()
