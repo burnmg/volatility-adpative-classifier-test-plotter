@@ -43,15 +43,15 @@ def analyse(res_file, drift_point_file, to_summary_file, to_figure_file):
     plt.ylabel('percentage of correct')
 
     # change point plot
-    if os.path.isfile(drift_point_file):
-        change_points = []
-        with open(drift_point_file, 'r') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                change_points.append(float(row['ClassifierChangePoint']))
-        for i in change_points:
-            plt.axvline(i, color='b')
-
+    # if os.path.isfile(drift_point_file):
+    #     change_points = []
+    #     with open(drift_point_file, 'r') as f:
+    #         reader = csv.DictReader(f)
+    #         for row in reader:
+    #             change_points.append(float(row['ClassifierChangePoint']))
+    #     for i in change_points:
+    #         plt.axvline(i, color='b')
+    #
     plt.grid(True)
     plt.savefig(to_figure_file)
 
